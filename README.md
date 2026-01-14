@@ -224,7 +224,7 @@ Each layer has **one responsibility** — no cross‑contamination.
 ## 🚀 Local Development
 
 ```bash
-git clone <repo>
+[git clone <repo>](https://github.com/manojpm181/figmenta-brain.git)
 cd figmenta-brain
 npm install
 npm run dev
@@ -236,6 +236,9 @@ Create `.env.local`:
 OPENAI_API_KEY=your_key
 SUPABASE_URL=your_url
 SUPABASE_ANON_KEY=your_key
+ADMIN_PASSWORD=password
+
+
 ```
 
 ---
