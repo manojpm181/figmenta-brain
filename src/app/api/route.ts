@@ -1,27 +1,42 @@
 import { NextResponse } from "next/server";
+import pdf from "pdf-parse";
 import { supabase } from "@/lib/supabase";
 import OpenAI from "openai";
 
+export const runtime = "nodejs";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY!,
+});
+
 export async function POST(req: Request) {
   const formData = await req.formData();
-  const file = formData.get("file") as File;
+  const file = formData.get("file") as File | null;
 
   if (!file) {
     return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
   }
 
-  // Convert file to buffer
   const buffer = Buffer.from(await file.arrayBuffer());
+  const parsed = await pdf(buffer);
 
-  // ✅ Dynamic import (FIX)
-  const pdfParse = (await import("pdf-parse")).default;
-  const parsed = await pdfParse(buffer);
+  const chunks = parsed.text
+    .split("\n")
+    .map((c: string) => c.trim())
+    .filter(Boolean)
+    .slice(0, 200);
 
-  const text = parsed.text;
+  for (const chunk of chunks) {
+    const embedding = await openai.embeddings.create({
+      model: "text-embedding-3-small",
+      input: chunk,
+    });
 
-  return NextResponse.json({
-    success: true,
-    textLength: text.length,
-  });
+    await supabase.from("documents").insert({
+      content: chunk,
+      embedding: embedding.data[0].embedding,
+    });
+  }
+
+  return NextResponse.json({ success: true });
 }
-
