@@ -180,17 +180,43 @@ Instead of feature sprawl:
 ## 📁 Folder Structure
 
 ```
-src/
- ├─ app/
- │   ├─ admin/              # AI governance UI
- │   ├─ api/
- │   │   ├─ chat/           # AI execution engine
- │   │   └─ instructions/   # System prompt control
- │   ├─ layout.tsx
- │   └─ page.tsx
- ├─ components/             # Clean UI primitives
- ├─ hooks/                  # Chat & state logic
- ├─ lib/                    # AI clients, Supabase, constants
+figmenta-brain/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx            # Root layout
+│   │   ├── page.tsx              # Dashboard
+│   │   ├── admin/
+│   │   │   └── page.tsx          # Admin Dashboard
+│   │   ├── api/
+│   │   │   ├── chat/route.ts     # AI Chat API
+│   │   │   ├── pdf/route.ts      # PDF upload & RAG
+│   │   │   └── tasks/route.ts    # Tasks CRUD
+│   │
+│   ├── components/
+│   │   ├── ChatBox.tsx
+│   │   ├── TaskBoard.tsx
+│   │   ├── TaskCard.tsx
+│   │   ├── PDFUploader.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── DarkModeToggle.tsx
+│   │   └── Charts.tsx
+│   │
+│   ├── lib/
+│   │   ├── supabaseClient.ts
+│   │   ├── aiClient.ts
+│   │   └── pdfRag.ts
+│   │
+│   ├── hooks/
+│   │   ├── useChat.ts
+│   │   ├── useTasks.ts
+│   │   └── useDarkMode.ts
+│
+├── public/
+├── bot/
+├── .env.local
+├── package.json
+└── README.md
+
 ```
 
 Each layer has **one responsibility** — no cross‑contamination.
