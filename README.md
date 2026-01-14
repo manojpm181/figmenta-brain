@@ -37,7 +37,8 @@ It introduces a clear separation between **policy (instructions)** and **executi
          │                          │
          │                          ▼
          │                ┌────────────────┐
-         │                │   AI Engine    │
+         │                │   AI Engine    │                       <img width="886" height="648" alt="image" src="https://github.com/user-attachments/assets/62d3b584-6f2c-4469-af0e-45aa4e325ace" />
+
          │                │ (Chat + RAG)   │
          │                └────────────────┘
          │                          │
