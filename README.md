@@ -1,36 +1,272 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 Figmenta Brain
 
-## Getting Started
+**Enterprise AI Copilot with Admin‑Controlled Intelligence & RAG**
 
-First, run the development server:
+Figmenta Brain is a production‑grade AI system that reviews product requirements, detects ambiguity, and enforces organizational standards — **centrally governed via an Admin Console** and deployed through a **secure Next.js App Router architecture**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This project treats AI like **infrastructure**, not a demo.
+
+---
+
+## ✨ Why This Project Exists
+
+Most AI copilots fail in production because:
+
+* Prompts are hardcoded and scattered
+* Behavior changes unpredictably
+* Hallucinations go undetected
+* Knowledge updates silently break logic
+
+**Figmenta Brain solves this with governance.**
+
+It introduces a clear separation between **policy (instructions)** and **execution (models)**, enabling:
+
+* Centralized control
+* Consistent behavior
+* Observable reasoning
+* Safe knowledge ingestion
+
+---
+
+## 🏗️ Architecture Overview
+
+```
+┌─────────────────┐       ┌────────────────────┐
+│  Admin Console  │──────▶│ System Instructions │
+└─────────────────┘       └────────────────────┘
+         │                          │
+         │                          ▼
+         │                ┌────────────────┐
+         │                │   AI Engine    │
+         │                │ (Chat + RAG)   │
+         │                └────────────────┘
+         │                          │
+         ▼                          ▼
+┌─────────────────┐       ┌────────────────────┐
+│  PDF / PRDs     │──────▶│ Vector Search (RAG) │
+└─────────────────┘       └────────────────────┘
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Key principle:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> The AI never runs without governance.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧩 Core Components
 
-To learn more about Next.js, take a look at the following resources:
+### 1️⃣ Admin Console (`/admin`)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A centralized governance UI for controlling AI behavior in real time.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Capabilities**
 
-## Deploy on Vercel
+* Edit system instructions without redeploys
+* Enforce organization‑wide AI behavior
+* Act as the single source of truth for prompts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Why this matters**
+In real companies, **prompts are policy, not code**. Hardcoding them leads to risk, drift, and inconsistency.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Admin Console is designed like an internal **Stripe / Linear‑style tool** — clean, focused, and powerful.
+
+---
+
+### 2️⃣ AI Chat Engine
+
+Built using **Next.js App Router**, the AI engine composes every response from:
+
+1. **Admin‑defined system instructions**
+2. **Conversation summary** (context compression)
+3. **Relevant document context** (RAG)
+
+This ensures:
+
+* Predictable behavior
+* Minimal token waste
+* Zero prompt leakage
+
+---
+
+### 3️⃣ RAG (Retrieval Augmented Generation)
+
+The system supports controlled knowledge ingestion via PDFs (PRDs, specs, internal docs).
+
+**Ingestion pipeline**
+
+* PDF upload
+* Intelligent chunking
+* Embedding generation
+* Storage in Supabase using `pgvector`
+
+**Query flow**
+
+* User prompt triggers semantic search
+* Only **relevant chunks** are injected
+* No full‑document stuffing
+
+**Result**
+
+* No hallucinated features
+* No outdated assumptions
+* Grounded, auditable answers
+
+---
+
+### 4️⃣ AI Explainability Layer (Advanced)
+
+Each AI response internally tracks:
+
+* Assumptions made
+* Missing or unclear information
+* Confidence level
+* Risk classification
+
+This enables future features like:
+
+* “Why did the AI say this?”
+* “What is uncertain here?”
+* AI decision audits
+
+> Transparency is a first‑class feature, not an afterthought.
+
+---
+
+## 🎯 Primary Use Case
+
+### Enterprise‑Realistic AI Product Requirement Reviewer
+
+**Input**
+
+* Feature description (text)
+* PRD (PDF upload)
+
+**Output**
+
+* Missing requirements
+* Ambiguities
+* Edge cases
+* Risk flags
+* Clarifying questions
+
+This mirrors how **senior engineers and PMs** actually review specs — not how demos pretend they do.
+
+---
+
+## 🧠 Design Philosophy
+
+### ✅ AI Governance > AI Power
+
+The system prioritizes:
+
+* Control
+* Reliability
+* Observability
+
+Over raw model capability.
+
+---
+
+### ✅ Lean MVP, Strong Foundations
+
+Instead of feature sprawl:
+
+* One core workflow
+* Executed cleanly
+* Production‑ready by default
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer     | Technology                       |
+| --------- | -------------------------------- |
+| Frontend  | Next.js (App Router), TypeScript |
+| Styling   | Tailwind CSS                     |
+| Backend   | Next.js API Routes               |
+| AI        | OpenAI‑compatible SDK            |
+| Database  | Supabase                         |
+| Vector DB | pgvector                         |
+| Auth      | Supabase Auth (extensible)       |
+
+---
+
+## 📁 Folder Structure
+
+```
+src/
+ ├─ app/
+ │   ├─ admin/              # AI governance UI
+ │   ├─ api/
+ │   │   ├─ chat/           # AI execution engine
+ │   │   └─ instructions/   # System prompt control
+ │   ├─ layout.tsx
+ │   └─ page.tsx
+ ├─ components/             # Clean UI primitives
+ ├─ hooks/                  # Chat & state logic
+ ├─ lib/                    # AI clients, Supabase, constants
+```
+
+Each layer has **one responsibility** — no cross‑contamination.
+
+---
+
+## 🔐 Reliability & Production Considerations
+
+* Prompt source of truth: **Database**
+* Stateless API routes
+* Model‑agnostic (OpenAI / Claude / Gemini compatible)
+* Easy rate‑limiting extension
+* Clean failure states (no silent errors)
+
+---
+
+## 🚀 Local Development
+
+```bash
+git clone <repo>
+cd figmenta-brain
+npm install
+npm run dev
+```
+
+Create `.env.local`:
+
+```env
+OPENAI_API_KEY=your_key
+SUPABASE_URL=your_url
+SUPABASE_ANON_KEY=your_key
+```
+
+---
+
+## 🧠 What Makes This Different
+
+Most projects show:
+
+* UI
+* Chat
+* Buzzwords
+
+This project shows:
+
+* Judgment
+* Architecture
+* Production thinking
+
+**This is how real AI systems are built inside companies.**
+
+---
+
+## 📈 Future Extensions (Intentional, Not Implemented)
+
+* Discord / Slack bot
+* Role‑based prompt access
+* Versioned system instructions
+* Prompt diff & rollback
+* AI response audits
+
+---
+
+## 👨‍💻 Author 
+Manoj P M | manojpoojari15112gmail.com
