@@ -224,7 +224,7 @@ Each layer has **one responsibility** — no cross‑contamination.
 ## 🚀 Local Development
 
 ```bash
-[git clone <repo>](https://github.com/manojpm181/figmenta-brain.git)
+git clone https://github.com/manojpm181/figmenta-brain.git
 cd figmenta-brain
 npm install
 npm run dev
