@@ -285,4 +285,5 @@ This project shows:
 
 ## 👨‍💻 Author 
 Manoj P M | manojpoojari15112gmail.com
+
 Software Engineer | Full-Stack (AI + Web)
