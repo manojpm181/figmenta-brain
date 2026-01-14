@@ -268,9 +268,13 @@ This project shows:
 * Judgment
 * Architecture
 * Production thinking
-<img width="1919" height="920" alt="Screenshot 2026-01-14 120907" src="https://github.com/user-attachments/assets/d32175ad-64ed-49ec-8986-15dfd22fe4c1" />
 
 **This is how real AI systems are built inside companies.**
+
+<img width="1919" height="920" alt="Screenshot 2026-01-14 120907" src="https://github.com/user-attachments/assets/6300740f-f14a-4fad-8fb0-2b01b39493c6" />
+<img width="1905" height="908" alt="Screenshot 2026-01-14 120917" src="https://github.com/user-attachments/assets/1d7cebe6-64b5-4bba-b4b3-84b87da915ba" />
+
+<img width="1908" height="979" alt="Screenshot 2026-01-14 121342" src="https://github.com/user-attachments/assets/5fe7d069-8c74-487e-a7a2-7481fab3a5c5" />
 
 ---
 
